@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=Pg123456$
+      - DB_NAME=pc-production-db
+      - JWT_SECRET=your_jwt_secret_key
+    network_mode: host
+    restart: unless-stopped

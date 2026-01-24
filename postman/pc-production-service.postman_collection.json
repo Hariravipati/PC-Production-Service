@@ -1,0 +1,286 @@
+{
+	"info": {
+		"name": "PC Production Service API",
+		"description": "Complete API collection for PC Production Service with JWT authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3002"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\",\n  \"email\": \"test@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    const token = response.data?.access_token || response.access_token;",
+									"    if (token) {",
+									"        pm.collectionVariables.set('access_token', token);",
+									"        console.log('Token saved:', token);",
+									"    }",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/profile",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Create Article (Complete)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"articleNo\": 1001,\n  \"articleName\": \"Corrugated Box Type A\",\n  \"articleHsnCode\": \"4819100000\",\n  \"articleUnit\": \"PCS\",\n  \"articleGstPercent\": 18,\n  \"articleDate\": \"2024-01-15\",\n  \"articleNoOfPly\": 3,\n  \"articleFluteType\": \"B\",\n  \"articleBoxWeight\": 0.5,\n  \"articleUps\": 1,\n  \"articlePcsPerBunddle\": 25,\n  \"articleIdLength\": 30.5,\n  \"articleIdWidth\": 20.5,\n  \"articleIdHeight\": 15.0,\n  \"articleOdLenth\": 32.0,\n  \"articleOdWidth\": 22.0,\n  \"articleOdHeight\": 16.0,\n  \"articleUom\": \"CM\",\n  \"articleSheetSize\": \"70x100\",\n  \"articleRotarySize\": \"65x95\",\n  \"articleBoardCuttingSize\": \"68x98\",\n  \"articleBoardGsm\": \"120GSM\",\n  \"articleBs\": \"22\",\n  \"articleCs\": \"3.5\",\n  \"articleMoisture\": \"8%\",\n  \"articlePrinting\": \"4 Color Offset\",\n  \"articleColor\": \"CMYK\",\n  \"articleArtWork\": \"Customer Logo\",\n  \"articleBlockCode\": \"BLK001\",\n  \"remarks\": \"Standard corrugated box\",\n  \"articleStatus\": \"Active\",\n  \"articleRate\": 15.50,\n  \"customerFcode\": 2001,\n  \"articleType\": \"Standard\",\n  \"articlePcsPerBoard\": 8,\n  \"revision\": 1,\n  \"route\": \"Production\",\n  \"boardMargin\": 5,\n  \"reelMargin\": 3,\n  \"articleReelSize\": 1200.0,\n  \"articleSquareMeter\": 0.0626,\n  \"isIdSelected\": true,\n  \"itemFcode\": 3001,\n  \"isTrayRequired\": false,\n  \"isPartitionRequired\": true,\n  \"noOfColor\": 4,\n  \"lamination\": \"Matt\",\n  \"metPad\": \"Silver\",\n  \"windowArticle\": \"None\",\n  \"boardLength\": 70.0,\n  \"boardWidth\": 100.0,\n  \"splitJoinStage\": \"Die Cutting\",\n  \"uv\": true,\n  \"dripoff\": false,\n  \"varnish\": true,\n  \"articleCurrentStock\": 500.0,\n  \"materialType\": \"Corrugated\",\n  \"uvSize\": \"Full\",\n  \"varnishSize\": \"Spot\",\n  \"articleBoardWeight\": 0.8,\n  \"laminationRate\": 2.5,\n  \"windowRate\": 0.0,\n  \"uvRate\": 1.2,\n  \"varnishRate\": 0.8\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/articles",
+							"host": ["{{base_url}}"],
+							"path": ["articles"]
+						}
+					}
+				},
+				{
+					"name": "Create Article (Minimal)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"articleNo\": 1002,\n  \"articleName\": \"Simple Box\",\n  \"articleRate\": 10.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/articles",
+							"host": ["{{base_url}}"],
+							"path": ["articles"]
+						}
+					}
+				},
+				{
+					"name": "Update Article",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"articleName\": \"Updated Box Type A\",\n  \"articleRate\": 16.00,\n  \"articleStatus\": \"Active\",\n  \"remarks\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/articles/1001",
+							"host": ["{{base_url}}"],
+							"path": ["articles", "1001"]
+						}
+					}
+				},
+				{
+					"name": "Get Single Article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles/1001",
+							"host": ["{{base_url}}"],
+							"path": ["articles", "1001"]
+						}
+					}
+				},
+				{
+					"name": "Get All Articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles",
+							"host": ["{{base_url}}"],
+							"path": ["articles"]
+						}
+					}
+				},
+				{
+					"name": "Delete Article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles/1002",
+							"host": ["{{base_url}}"],
+							"path": ["articles", "1002"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Error Testing",
+			"item": [
+				{
+					"name": "Access Without Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles",
+							"host": ["{{base_url}}"],
+							"path": ["articles"]
+						}
+					}
+				},
+				{
+					"name": "Invalid Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"wrong\",\n  \"password\": \"wrong\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Non-existent Article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles/99999",
+							"host": ["{{base_url}}"],
+							"path": ["articles", "99999"]
+						}
+					}
+				},
+				{
+					"name": "Invalid Article Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"articleName\": \"\",\n  \"articleRate\": -5\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/articles",
+							"host": ["{{base_url}}"],
+							"path": ["articles"]
+						}
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,184 @@
+{
+  "info": {
+    "name": "E-Onboarding API",
+    "_postman_id": "e-onboarding-collection",
+    "description": "Postman collection for controllers in src/modules/e-onboarding/Controller",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "EobRequestController",
+      "item": [
+        {
+          "name": "Get Organizations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/organizations",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","organizations"]
+            }
+          }
+        },
+        {
+          "name": "Get Form Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/org-formDetails?orgId=1&formMappingId=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","org-formDetails"],
+              "query": [
+                { "key": "orgId", "value": "1" },
+                { "key": "formMappingId", "value": "1" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Org Forms List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/org-forms-list?orgId=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","org-forms-list"],
+              "query": [
+                { "key": "orgId", "value": "1" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create EOB Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateName\": \"John Doe\",\n  \"mobileNo\": \"9999999999\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/eob-request",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","eob-request"]
+            }
+          }
+        },
+        {
+          "name": "Get EOB Requests By OrgId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/eob-requests-by-orgId/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","eob-requests-by-orgId","1"]
+            }
+          }
+        },
+        {
+          "name": "Download EOB Template",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/download-eob-template?format=csv",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","download-eob-template"],
+              "query": [ { "key": "format", "value": "csv" } ]
+            }
+          }
+        },
+        {
+          "name": "Bulk S3 Upload (form-data)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/bulk-S3-upload-async",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding","bulk-S3-upload-async"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "EobVerificationController",
+      "item": [
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobileNo\": \"9999999999\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/onboarding/send-otp", "host": ["{{baseUrl}}"], "path": ["onboarding","send-otp"] }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mobileNo\": \"9999999999\",\n  \"otp\": \"123456\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/onboarding/verify-otp", "host": ["{{baseUrl}}"], "path": ["onboarding","verify-otp"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "EobCandidateResponceController",
+      "item": [
+        {
+          "name": "Create Employee KYC",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employeeId\": \"EMP001\",\n  \"kycDocs\": []\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/candidate", "host": ["{{baseUrl}}"], "path": ["candidate"] }
+          }
+        },
+        {
+          "name": "Save Education Details",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateId\": \"CAND001\",\n  \"education\": []\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/candidate/save-education-details", "host": ["{{baseUrl}}"], "path": ["candidate","save-education-details"] }
+          }
+        }
+      ]
+    }
+  ]
+}

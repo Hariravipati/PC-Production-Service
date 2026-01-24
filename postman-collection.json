@@ -1,0 +1,113 @@
+{
+  "info": {
+    "name": "Onboarding Service API",
+    "description": "NestJS Onboarding Service with MSSQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Organizations",
+      "item": [
+        {
+          "name": "Get All Organizations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/organizations",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding", "organizations"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Onboarding Requests",
+      "item": [
+        {
+          "name": "Get Requests by Organization",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/requests/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding", "requests", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Onboarding Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orgId\": 1,\n  \"formVersionId\": 1,\n  \"email\": \"user@example.com\",\n  \"mobileNo\": \"+1234567890\",\n  \"expiryDate\": \"2024-12-31T23:59:59.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding", "requests"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Onboarding Responses",
+      "item": [
+        {
+          "name": "Update Response",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isSaved\": true,\n  \"isCompleted\": false,\n  \"responseJson\": \"{\\\"field1\\\": \\\"value1\\\", \\\"field2\\\": \\\"value2\\\"}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/onboarding/responses/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["onboarding", "responses", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "API Documentation",
+      "item": [
+        {
+          "name": "Swagger UI",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api",
+              "host": ["{{baseUrl}}"],
+              "path": ["api"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

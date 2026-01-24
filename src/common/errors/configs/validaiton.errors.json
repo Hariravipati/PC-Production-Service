@@ -1,0 +1,12 @@
+{
+  "USER_NOT_FOUND": {
+    "status": 404,
+    "tag": "FAILURE.USER_NOT_FOUND",
+    "message": "User not found"
+  },
+  "USER_ALREADY_EXISTS": {
+    "status": 409,
+    "tag": "FAILURE.USER_ALREADY_EXISTS",
+    "message": "User already exists"
+  }
+}
