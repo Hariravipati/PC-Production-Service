@@ -20,10 +20,10 @@ import {
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
+      host: process.env.DB_HOST || 'host.docker.internal',
       port: parseInt(process.env.DB_PORT) || 5432,
-      username: process.env.DB_USERNAME || 'postgres',
-      password: process.env.DB_PASSWORD || 'Pg123456$',
+      username: process.env.DB_USERNAME || 'Sa',
+      password: process.env.DB_PASSWORD || 'Tl576457$',
       database: process.env.DB_NAME || 'pc-production-db',
       entities: [
         UserEntity,
@@ -39,7 +39,6 @@ import {
         CustomerReelDetailEntity,
       ],
       synchronize: process.env.NODE_ENV !== 'production',
-      
     }),
     DatabaseModule,
     AuthModule,
