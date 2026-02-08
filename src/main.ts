@@ -6,6 +6,9 @@ import { GlobalExceptionFilter } from './filters/global-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { GlobalValidationPipe } from './common/pipes/validation.pipe';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
