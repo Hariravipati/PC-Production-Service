@@ -5,8 +5,10 @@ import { UserId } from '../../auth/decorators/user.decorator';
 import { BaseController } from '../../../common/controllers/base.controller';
 import { CreateArticleDto, UpdateArticleDto } from '../dto/article.dto';
 import { ResponseDto } from '../../../common/dto/response_dto';
+import { Public } from '../../auth/decorators/public.decorator';
 
 @Controller('articles')
+@Public()
 export class ArticleController extends BaseController {
   constructor(private readonly articleService: ArticleService) {
     super();
