@@ -28,7 +28,7 @@ async function bootstrap() {
     logger.log('Global filters, interceptors, pipes and guards registered');
 
     const config = new DocumentBuilder()
-      .setTitle('Polar Canvas Production Service API')
+      .setTitle('Polar Canvas Production Service API-WithoutAuth')
       .setDescription('NestJS Polar Canvas Production Service with MSSQL')
       .setVersion('1.0')
       .build();

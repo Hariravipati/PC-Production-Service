@@ -5,9 +5,9 @@ export abstract class BaseService {
   protected readonly logger = new Logger(this.constructor.name);
 
   protected validateUserId(userId: number): void {
-    if (!userId || userId <= 0) {
-      throw new BusinessException('Invalid user ID');
-    }
+    // if (!userId || userId <= 0) {
+    //   throw new BusinessException('Invalid user ID');
+    // }
   }
 
   protected throwNotFound(resource: string): never {
