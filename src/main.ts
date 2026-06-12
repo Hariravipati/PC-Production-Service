@@ -17,6 +17,18 @@ async function bootstrap() {
     logger.log('Starting Polar Canvas Production Service...');
     
     const app = await NestFactory.create(AppModule);
+    const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173,https://production.polarcanvas.in')
+      .split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean);
+
+    app.enableCors({
+      origin: allowedOrigins,
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    });
+
     logger.log('NestJS application created successfully');
 
     app.useGlobalFilters(new GlobalExceptionFilter());
@@ -28,7 +40,7 @@ async function bootstrap() {
     logger.log('Global filters, interceptors, pipes and guards registered');
 
     const config = new DocumentBuilder()
-      .setTitle('Polar Canvas Production Service API-WithoutAuth')
+      .setTitle('Polar Canvas Production Service API-WithAuth')
       .setDescription('NestJS Polar Canvas Production Service with MSSQL')
       .setVersion('1.0')
       .build();
