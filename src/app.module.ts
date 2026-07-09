@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './modules/artical/database.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ZohoInvoiceModule } from './zoho-invoice/zoho-invoice.module';
 import { UserEntity } from './modules/auth/entities/user.entity';
 import {
   AddContractorEntity,
@@ -54,6 +55,7 @@ import {
     }),
     DatabaseModule,
     AuthModule,
+    ZohoInvoiceModule,
   ],
 })
 export class AppModule { }
